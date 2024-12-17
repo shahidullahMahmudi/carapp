@@ -1,9 +1,14 @@
+import CarCard from '@/components/CarCard';
 import CustomFilter from '@/components/CustomFilter';
 import Hero from '@/components/Hero';
 import SearchBar from '@/components/SearchBar';
+import { fetchCars } from '@/utils';
 import React from 'react';
 
-const Home = () => {
+const Home = async() => {
+const allCars=await fetchCars();
+const isDataEmpty=!Array.isArray(allCars)||allCars.length<1||!allCars;
+
   return (
     <main className='overflow-hidden'>
       <Hero/>
@@ -13,6 +18,7 @@ const Home = () => {
             Car Catalogue
           </h1>
             <p>Explore ther cars you might like</p>
+        
 
 
         </div>
@@ -25,6 +31,20 @@ const Home = () => {
           </div>
 
         </div>
+        {
+          !isDataEmpty ?(
+            <section>
+              <div className='home__cars-wrapper'>
+                {allCars?.map((car)=><CarCard car={car}/>)}
+              </div>
+            </section>
+          ):(
+            <div className='home__error-container'>
+              <h2>Oops, no results</h2>
+              <p>{allCars?.message}</p>
+            </div>
+          )
+        }
 
       </div>
     </main>
