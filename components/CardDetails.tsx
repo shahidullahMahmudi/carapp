@@ -74,7 +74,11 @@ const CardDetails = ({isOpen,closeModal,car}:CarDetailsProps) => {
         <div className='mt-3 flex flex-wrap gap-4'>
             {
                 Object.entries(car).map(([key,value])=>(
-                    <div className='flex justify-between gap-5 w-full text-right' key={key}> </div>
+                    <div className='flex justify-between gap-5 w-full text-right' key={key}> 
+                    
+                    <h4>{key}</h4>
+                    <p>{value}</p>
+                    </div>
 
                 ))
             }
